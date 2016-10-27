@@ -1,4 +1,10 @@
 
+GraphQL Tutorial
+================
+
+This is a tutorial in 12 steps to introduce GraphQL.
+Run the tutorial steps with `npm run sample-XX`.
+
 GraphQL Resources
 =================
 
