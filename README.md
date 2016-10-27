@@ -2,8 +2,22 @@
 GraphQL Tutorial
 ================
 
-This is a tutorial in 12 steps to introduce GraphQL.
-Run the tutorial steps with `npm run sample-XX`.
+This is a tutorial which step-by-step introduces GraphQL.
+Each tutorial step can be run with `npm run sample-XX`.
+The tutorial steps are:
+
+1. just plain all-in-one GraphQL "Hello World"
+2. replaces GraphQL schema API calls with GraphQL schema definition language
+3. split GraphQL usage into distinct parts
+4. replace "Hello World" with an entity "OrgUnit" and enable schema/resolver warnings
+5. add "Person" entity and use a separate data store
+6. factor out resolver functionality into generic data access object functions
+7. add QueryEntityOne DAO method for querying particular objects
+8. allow relationships to be queried and be strict on resolvers now
+9. add remaining CRUD operations (create/clone, update, delete) to GraphQL entity types
+10. wrap GraphQL application programming interface (API) with a remote network interface (RNI)
+11. replace built-in client with interactive GraphQL web user interface (GraphiQL)
+12. add descriptions to GraphQL schema for introspection inside GraphiQL
 
 GraphQL Resources
 =================
