@@ -2,9 +2,12 @@
 GraphQL Tutorial
 ================
 
-This is a tutorial which step-by-step introduces GraphQL.
-Each tutorial step XX can be found in the file `sample-XX` and run with `npm run sample-XX`.
-The 12 tutorial steps are:
+This is a didactic introduction to GraphQL, starting from a simple Hello
+World to a network-based GraphQL server with a built-in GraphQL UI.
+It is provided in the form of a tutoriak tutorial which step-by-step
+introduces more usage of GraphQL. Each tutorial step `XX` can be found
+in the file `sample-XX` and run with `npm run sample-XX`. The 12
+tutorial steps are:
 
 1. just plain all-in-one GraphQL "Hello World"
 2. replaces GraphQL schema API calls with GraphQL schema definition language

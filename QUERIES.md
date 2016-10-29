@@ -2,11 +2,8 @@
 Queries
 =======
 
-This is a didactic introduction to GraphQL, starting from
-a simple Hello World to a network-based GraphQL server
-with a built-in GraphQL UI.
-
-For inspiration, here are a few sample GraphQL queries:
+For inspiration, here are a few sample GraphQL queries
+for use with the final `sample-12`:
 
 ```txt
 query MobileClient {
