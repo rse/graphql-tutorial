@@ -11,11 +11,11 @@
     "dependencies": {
         "graphql":              "~0.7.2",
         "graphql-tools":        "~0.8.0",
-        "graphql-tools-types":  "~0.9.4",
+        "graphql-tools-types":  "~0.9.5",
         "hapi":                 "~15.2.0",
-        "hapi-plugin-graphiql": "~0.9.6",
+        "hapi-plugin-graphiql": "~1.0.0",
         "boom":                 "~4.2.0",
-        "request":              "~2.76.0",
+        "request":              "~2.78.0",
         "request-promise":      "~4.1.1"
     },
     "scripts": {
