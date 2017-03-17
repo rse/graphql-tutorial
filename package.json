@@ -3,20 +3,20 @@
     "version":     "0.0.0",
     "description": "TechINSIGHT GraphQL - Sample Service",
     "devDependencies": {
-        "babel-cli":            "~6.22.2",
-        "babel-preset-es2015":  "~6.22.0",
+        "babel-cli":            "~6.24.0",
+        "babel-preset-es2015":  "~6.24.0",
         "babel-preset-es2016":  "~6.22.0",
         "babel-preset-es2017":  "~6.22.0"
     },
     "dependencies": {
         "graphql":              "~0.9.1",
-        "graphql-tools":        "~0.9.2",
-        "graphql-tools-types":  "~1.0.3",
+        "graphql-tools":        "~0.10.1",
+        "graphql-tools-types":  "~1.0.4",
         "hapi":                 "~16.1.0",
-        "hapi-plugin-graphiql": "~1.2.0",
+        "hapi-plugin-graphiql": "~1.2.3",
         "boom":                 "~4.2.0",
-        "request":              "~2.79.0",
-        "request-promise":      "~4.1.1"
+        "request":              "~2.81.0",
+        "request-promise":      "~4.2.0"
     },
     "scripts": {
         "sample-01": "babel-node --presets es2015,es2016,es2017 sample-01.js",
