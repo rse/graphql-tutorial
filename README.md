@@ -23,6 +23,7 @@ tutorial steps are:
 12. add descriptions to GraphQL schema for introspection inside GraphiQL
 13. move data into SQLite RDBMS and access it with Sequelize ORM
 14. wrap mutations into a single RDBMS transaction
+15. support also GraphQL over Websocket communication
 
 GraphQL Resources
 =================
