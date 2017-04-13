@@ -21,6 +21,8 @@ tutorial steps are:
 10. wrap GraphQL application programming interface (API) with a remote network interface (RNI)
 11. replace built-in client with interactive GraphQL web user interface (GraphiQL)
 12. add descriptions to GraphQL schema for introspection inside GraphiQL
+13. move data into SQLite RDBMS and access it with Sequelize ORM
+14. wrap mutations into a single RDBMS transaction
 
 GraphQL Resources
 =================
