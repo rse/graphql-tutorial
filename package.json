@@ -34,6 +34,7 @@
         "sample-10": "babel-node --presets es2015,es2016,es2017 sample-10.js",
         "sample-11": "babel-node --presets es2015,es2016,es2017 sample-11.js",
         "sample-12": "babel-node --presets es2015,es2016,es2017 sample-12.js",
-        "sample-13": "babel-node --presets es2015,es2016,es2017 sample-13.js"
+        "sample-13": "babel-node --presets es2015,es2016,es2017 sample-13.js",
+        "sample-14": "babel-node --presets es2015,es2016,es2017 sample-14.js"
     }
 }
