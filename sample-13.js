@@ -29,8 +29,8 @@ import HAPIGraphiQL      from "hapi-plugin-graphiql"
 import Boom              from "boom"
 
 /*  establish database connection  */
-const db = new Sequelize("./sample-13.db", "", "", {
-    dialect: "sqlite", host: "", port: "", storage: "./sample-13.db",
+const db = new Sequelize("./sample.db", "", "", {
+    dialect: "sqlite", host: "", port: "", storage: "./sample.db",
     define: { freezeTableName: true, timestamps: false },
     logging: (msg) => { console.log("DB: " + msg) },
 })
