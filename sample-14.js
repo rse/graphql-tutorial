@@ -340,7 +340,7 @@ server.route({
 
 /*  start server  */
 server.start(() => {
-    console.log(`GraphiQL UI:  [GET]  ${server.info.uri}/api`)
-    console.log(`GraphQL  API: [POST] ${server.info.uri}/api`)
+    console.log(`GraphiQL UI:  [GET]  http://${server.info.host}:${server.info.port}/api`)
+    console.log(`GraphQL  API: [POST] http://${server.info.host}:${server.info.port}/api`)
 })
 
