@@ -93,12 +93,12 @@ Server SDK [JavaScript]
   https://github.com/graphql/graphql-js
 
 - GraphQL-Tools<br/>
-  http://dev.apollodata.com/tools/
+  http://dev.apollodata.com/tools/<br/>
   https://github.com/apollostack/graphql-tools
 
 - GraphQL-Tools Addons<br/>
-  https://github.com/rse/graphql-tools-types
-  https://github.com/rse/graphql-tools-sequelize
+  https://github.com/rse/graphql-tools-types<br/>
+  https://github.com/rse/graphql-tools-sequelize<br/>
   https://github.com/rse/graphql-tools-subscribe
 
 - HAPI Plugin for GraphiQL Integration<br/>
@@ -108,7 +108,7 @@ Client SDK [JavaScript]
 -----------------------
 
 - Apollo Client [JavaScript]<br/>
-  http://www.apollostack.com/
+  http://www.apollostack.com/<br/>
   http://dev.apollodata.com/
 
 - Lokka [JavaScript]<br/>
