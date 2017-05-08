@@ -4,7 +4,7 @@ GraphQL Tutorial
 
 This is a didactic introduction to GraphQL, starting from a simple Hello
 World to a network-based GraphQL server with a built-in GraphQL UI.
-It is provided in the form of a tutoriak tutorial which step-by-step
+It is provided in the form of a tutorial which step-by-step
 introduces more usage of GraphQL. Each tutorial step `XX` can be found
 in the file `sample-XX` and run with `npm run sample-XX`. The
 distinct tutorial steps are:
