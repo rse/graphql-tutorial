@@ -65,6 +65,9 @@ Tools
 - ChromeiQL<br/>
   https://chrome.google.com/webstore/detail/chromeiql/fkkiamalmpiidkljmicmjfbieiclmeij
 
+- GraphiCLI/Gest<br/>
+  https://github.com/mfix22/graphicli
+
 - GraphQL Network for Chrome<br/>
   https://chrome.google.com/webstore/detail/graphql-network/igbmhmnkobkjalekgiehijefpkdemocm
 
