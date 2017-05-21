@@ -86,6 +86,15 @@ Tools
 - DGraph<br/>
   https://dgraph.io/
 
+Cloud Services
+--------------
+
+- GraphQL LaunchPad<br/>
+  https://launchpad.graphql.com/
+
+- GraphCool<br/>
+  https://www.graph.cool/
+
 Server SDK [JavaScript]
 -----------------------
 
