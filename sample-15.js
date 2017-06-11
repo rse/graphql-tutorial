@@ -303,10 +303,27 @@ server.route({
     method: "POST",
     path:   "/api",
     config: {
-        plugins: { websocket: true },
+        plugins: {
+            websocket: {
+                initially:     true,
+                autoping:      10 * 1000,
+                frame:         true,
+                frameEncoding: "json",
+                frameRequest:  "GRAPHQL-REQUEST",
+                frameResponse: "GRAPHQL-RESPONSE"
+            }
+        },
         payload: { output: "data", parse: true, allow: "application/json" }
     },
     handler: (request, reply) => {
+        /*  determine optional WebSocket information  */
+        let ws = request.websocket()
+
+        /*  short-circuit handler processing of initial WebSocket message
+            (instead we just want the authentication to be done by HAPI)  */
+        if (ws.initially)
+            return reply().code(204)
+
         /*  determine request  */
         if (typeof request.payload !== "object" || request.payload === null)
             return reply(Boom.badRequest("invalid request"))
