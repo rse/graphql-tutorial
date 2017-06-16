@@ -24,6 +24,7 @@ distinct tutorial steps are:
 13. move data into SQLite RDBMS and access it with Sequelize ORM
 14. wrap mutations into a single RDBMS transaction
 15. support also GraphQL over Websocket communication
+16. add GraphQL Subscription support
 
 GraphQL Resources
 =================
