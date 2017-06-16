@@ -89,7 +89,8 @@ dm.Person .belongsTo(dm.OrgUnit, { as: "belongsTo",  foreignKey: "orgUnitId"    
 /*  bootstrap GraphQL to Sequelize mapping  */
 let id = 0
 const gts = new GraphQLSequelize(db, {
-    idtype: "String", idmake: () => (id++).toString()
+    idtype: "String",
+    idmake: () => (id++).toString()
 })
 gts.boot()
 
@@ -299,6 +300,7 @@ server.register({
 })
 
 /*  establish the HAPI route for GraphQL API  */
+let timeout = 2 * 1000
 server.route({
     method: "POST",
     path:   "/api",
@@ -313,7 +315,8 @@ server.route({
                 frameResponse: "GRAPHQL-RESPONSE"
             }
         },
-        payload: { output: "data", parse: true, allow: "application/json" }
+        timeout: { server:  timeout - 100, socket: timeout },
+        payload: { timeout: timeout - 100, output: "data", parse: true, allow: "application/json" }
     },
     handler: (request, reply) => {
         /*  determine optional WebSocket information  */

@@ -86,7 +86,8 @@ dm.Person .belongsTo(dm.OrgUnit, { as: "belongsTo",  foreignKey: "orgUnitId"    
 /*  bootstrap GraphQL to Sequelize mapping  */
 let id = 0
 const gts = new GraphQLSequelize(db, {
-    idtype: "String", idmake: () => (id++).toString()
+    idtype: "String",
+    idmake: () => (id++).toString()
 })
 gts.boot()
 
