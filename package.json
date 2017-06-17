@@ -17,7 +17,7 @@
         "hapi":                    "~16.4.3",
         "hapi-plugin-graphiql":    "~1.2.3",
         "hapi-plugin-peer":        "~0.9.5",
-        "hapi-plugin-websocket":   "~1.2.4",
+        "hapi-plugin-websocket":   "~1.2.5",
         "boom":                    "~5.1.0",
         "request":                 "~2.81.0",
         "request-promise":         "~4.2.1",
