@@ -19,7 +19,7 @@
 **  14. wrap mutations into a single RDBMS transaction
 **  15. support also GraphQL over Websocket communication
 **  16. add GraphQL Subscription support
-**  17. migrate to all-in-one GraphQL-IO framework
+**  17. simplify and migrate to all-in-one GraphQL-IO framework
 */
 
 /*  external requirements  */
