@@ -225,9 +225,9 @@ let resolvers = {
         Subscription:  sub.resolverSubscription()
     },
     Subscription: {
+        subscriptions: sub.resolverSubscriptions(),
         subscribe:     sub.resolverSubscribe(),
         unsubscribe:   sub.resolverUnsubscribe(),
-        subscriptions: sub.resolverSubscriptions(),
         pause:         sub.resolverPause(),
         resume:        sub.resolverResume()
     },
