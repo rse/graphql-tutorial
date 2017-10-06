@@ -38,6 +38,7 @@ import Boom              from "boom"
 const db = new Sequelize("./sample.db", "", "", {
     dialect: "sqlite", host: "", port: "", storage: "./sample.db",
     define: { freezeTableName: true, timestamps: false },
+    operatorsAliases: false,
     logging: (msg) => { console.log("DB: " + msg) },
 })
 db.authenticate()
@@ -161,7 +162,7 @@ let definition = `
     }
 
     #   The internal GraphQL subscription service.
-    type Subscription {
+    type _Subscription {
         ${sub.schemaSubscriptions()}
         ${sub.schemaSubscribe()}
         ${sub.schemaUnsubscribe()}
@@ -222,9 +223,9 @@ let resolvers = {
         OrgUnits:   DAO.QueryEntityAll         ("OrgUnit"),
         Person:     DAO.QueryEntityOne         ("Person"),
         Persons:    DAO.QueryEntityAll         ("Person"),
-        Subscription:  sub.resolverSubscription()
+        _Subscription: sub.resolverSubscription()
     },
-    Subscription: {
+    _Subscription: {
         subscriptions: sub.resolverSubscriptions(),
         subscribe:     sub.resolverSubscribe(),
         unsubscribe:   sub.resolverUnsubscribe(),

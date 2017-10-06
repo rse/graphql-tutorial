@@ -32,6 +32,7 @@ import Boom              from "boom"
 const db = new Sequelize("./sample.db", "", "", {
     dialect: "sqlite", host: "", port: "", storage: "./sample.db",
     define: { freezeTableName: true, timestamps: false },
+    operatorsAliases: false,
     logging: (msg) => { console.log("DB: " + msg) },
 })
 db.authenticate()
