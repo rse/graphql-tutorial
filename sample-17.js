@@ -128,7 +128,7 @@ class DAO {
 let definition = `
     #   The root type for entering the graph of **OrgUnit** and **Person** entities.
     #   Access a single entity by unique id or access all entities.
-    extend type Root {
+    type Root {
         #   Access a particular organizational unit by unique id.
         ${gts.entityQuerySchema("Root", "", "OrgUnit")}
         #   Access all organizational units.
@@ -268,16 +268,14 @@ server.at("graphql-schema",   () => definition)
 server.at("graphql-resolver", () => resolvers)
 
 /*  wrap GraphQL operation into a database transaction  */
-server.at("graphql-transaction", async (ctx) => {
+server.at("graphql-transaction", (ctx) => {
     return (cb) => {
         return db.transaction({
             autocommit:     false,
             deferrable:     true,
             type:           db.Transaction.TYPES.DEFERRED,
             isolationLevel: db.Transaction.ISOLATION_LEVELS.SERIALIZABLE
-        }, (tx) => {
-            cb(tx)
-        })
+        }, (tx) => cb(tx))
     }
 })
 
