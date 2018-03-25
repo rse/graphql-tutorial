@@ -218,50 +218,52 @@ let query = `
     }
 `
 
-/*  setup network service  */
-let server = new HAPI.Server()
-server.connection({
-    address:  "0.0.0.0",
-    port:     12345
-})
+;(async () => {
+    /*  setup network service  */
+    let server = new HAPI.Server({
+        address:  "0.0.0.0",
+        port:     12345
+    })
 
-/*  establish the HAPI route for GraphQL API  */
-server.route({
-    method: "POST",
-    path:   "/api",
-    config: {
-        payload: { output: "data", parse: true, allow: "application/json" }
-    },
-    handler: (request, reply) => {
-        /*  determine request  */
-        if (typeof request.payload !== "object" || request.payload === null)
-            return reply(Boom.badRequest("invalid request"))
-        let query     = request.payload.query
-        let variables = request.payload.variables
-        let operation = request.payload.operationName
+    /*  establish the HAPI route for GraphQL API  */
+    server.route({
+        method: "POST",
+        path:   "/api",
+        options: {
+            payload: { output: "data", parse: true, allow: "application/json" }
+        },
+        handler: async (request, h) => {
+            /*  determine request  */
+            if (typeof request.payload !== "object" || request.payload === null)
+                return Boom.badRequest("invalid request")
+            let query     = request.payload.query
+            let variables = request.payload.variables
+            let operation = request.payload.operationName
 
-        /*  support special case of GraphiQL  */
-        if (typeof variables === "string")
-            variables = JSON.parse(variables)
-        if (typeof operation === "object" && operation !== null)
-            return reply(Boom.badRequest("invalid request"))
+            /*  support special case of GraphiQL  */
+            if (typeof variables === "string")
+                variables = JSON.parse(variables)
+            if (typeof operation === "object" && operation !== null)
+                return Boom.badRequest("invalid request")
 
-        /*  create context for GraphQL resolver functions  */
-        let ctx = { /* empty for this sample  */ }
+            /*  create context for GraphQL resolver functions  */
+            let ctx = { /* empty for this sample  */ }
 
-        /*  execute the GraphQL query against the GraphQL schema  */
-        GraphQL.graphql(schema, query, null, ctx, variables, operation).then((result) => {
-            return reply(result).code(200)
-        }).catch((result) => {
-            return reply(result).code(200)
-        })
-    }
-})
+            /*  execute the GraphQL query against the GraphQL schema  */
+            return GraphQL.graphql(schema, query, null, ctx, variables, operation).then((result) => {
+                return h.response(result).code(200)
+            }).catch((result) => {
+                return h.response(result).code(200)
+            })
+        }
+    })
 
-/*  start server  */
-server.start(() => {
-    console.log(`GraphQL  API: [POST] ${server.info.uri}/api`)
-    request({
+    /*  start server  */
+    await server.start()
+    console.log(`GraphQL  API: [POST] http://${server.info.host}:${server.info.port}/api`)
+
+    /*  perform client requests  */
+    let result = await request({
         method: "POST",
         uri:    "http://127.0.0.1:12345/api",
         body: {
@@ -270,12 +272,10 @@ server.start(() => {
             variables: {}
         },
         json: true
-    }).then((result) => {
-        console.log("OK", util.inspect(result, { depth: null, colors: true }))
-        server.stop()
-    }).catch((result) => {
-        console.log("ERROR", result)
-        server.stop()
     })
+    console.log("OK", util.inspect(result, { depth: null, colors: true }))
+    await server.stop()
+})().catch((err) => {
+    console.log("ERROR", err)
 })
 

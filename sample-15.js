@@ -130,6 +130,7 @@ let definition = `
         mutation: Root
     }
     scalar JSON
+    scalar UUID
 
     #   The root type for entering the graph of **OrgUnit** and **Person** entities.
     #   Access a single entity by unique id or access all entities.
@@ -190,6 +191,7 @@ let definition = `
 /*  the GraphQL schema resolvers  */
 let resolvers = {
     JSON: GraphQLTypes.JSON({ name: "JSON" }),
+    UUID: GraphQLTypes.UUID({ name: "UUID", storage: "string" }),
     Root: {
         OrgUnit:    DAO.QueryEntityOne         ("OrgUnit"),
         OrgUnits:   DAO.QueryEntityAll         ("OrgUnit"),
@@ -273,100 +275,104 @@ let query = `
     }
 `
 
-/*  setup network service  */
-let server = new HAPI.Server()
-server.connection({
-    address:  "0.0.0.0",
-    port:     12345
-})
-server.register(HAPIWebSocket)
+;(async () => {
+    /*  setup network service  */
+    let server = new HAPI.Server({
+        address:  "0.0.0.0",
+        port:     12345
+    })
 
-/*  establish the HAPI route for GraphiQL UI  */
-server.register({
-    register: HAPIGraphiQL,
-    options: {
-        graphiqlURL:      "/api",
-        graphqlFetchURL:  "/api",
-        graphqlFetchOpts: `{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept":       "application/json"
+    /*  add WebSocket support to HAPI  */
+    await server.register(HAPIWebSocket)
+
+    /*  establish the HAPI route for GraphiQL UI  */
+    await server.register({
+        plugin: HAPIGraphiQL,
+        options: {
+            graphiqlURL:      "/api",
+            graphqlFetchURL:  "/api",
+            graphqlFetchOpts: `{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept":       "application/json"
+                },
+                body: JSON.stringify(params),
+                credentials: "same-origin"
+            }`,
+            graphqlExample: query.replace(/^\n/, "").replace(/^    /mg, "")
+        }
+    })
+
+    /*  establish the HAPI route for GraphQL API  */
+    let timeout = 2 * 1000
+    server.route({
+        method: "POST",
+        path:   "/api",
+        options: {
+            plugins: {
+                websocket: {
+                    initially:     true,
+                    autoping:      10 * 1000,
+                    frame:         true,
+                    frameEncoding: "json",
+                    frameRequest:  "GRAPHQL-REQUEST",
+                    frameResponse: "GRAPHQL-RESPONSE"
+                }
             },
-            body: JSON.stringify(params),
-            credentials: "same-origin"
-        }`,
-        graphqlExample: query.replace(/^\n/, "").replace(/^    /mg, "")
-    }
-})
-
-/*  establish the HAPI route for GraphQL API  */
-let timeout = 2 * 1000
-server.route({
-    method: "POST",
-    path:   "/api",
-    config: {
-        plugins: {
-            websocket: {
-                initially:     true,
-                autoping:      10 * 1000,
-                frame:         true,
-                frameEncoding: "json",
-                frameRequest:  "GRAPHQL-REQUEST",
-                frameResponse: "GRAPHQL-RESPONSE"
-            }
+            timeout: { server:  timeout - 100, socket: timeout },
+            payload: { timeout: timeout - 100, output: "data", parse: true, allow: "application/json" }
         },
-        timeout: { server:  timeout - 100, socket: timeout },
-        payload: { timeout: timeout - 100, output: "data", parse: true, allow: "application/json" }
-    },
-    handler: (request, reply) => {
-        /*  determine optional WebSocket information  */
-        let ws = request.websocket()
+        handler: async (request, h) => {
+            /*  determine optional WebSocket information  */
+            let ws = request.websocket()
 
-        /*  short-circuit handler processing of initial WebSocket message
-            (instead we just want the authentication to be done by HAPI)  */
-        if (ws.initially)
-            return reply().code(204)
+            /*  short-circuit handler processing of initial WebSocket message
+                (instead we just want the authentication to be done by HAPI)  */
+            if (ws.initially)
+                return h.response().code(204)
 
-        /*  determine request  */
-        if (typeof request.payload !== "object" || request.payload === null)
-            return reply(Boom.badRequest("invalid request"))
-        let query     = request.payload.query
-        let variables = request.payload.variables
-        let operation = request.payload.operationName
+            /*  determine request  */
+            if (typeof request.payload !== "object" || request.payload === null)
+                return Boom.badRequest("invalid request")
+            let query     = request.payload.query
+            let variables = request.payload.variables
+            let operation = request.payload.operationName
 
-        /*  support special case of GraphiQL  */
-        if (typeof variables === "string")
-            variables = JSON.parse(variables)
-        if (typeof operation === "object" && operation !== null)
-            return reply(Boom.badRequest("invalid request"))
+            /*  support special case of GraphiQL  */
+            if (typeof variables === "string")
+                variables = JSON.parse(variables)
+            if (typeof operation === "object" && operation !== null)
+                return Boom.badRequest("invalid request")
 
-        /*  wrap GraphQL operation into a database transaction  */
-        return db.transaction({
-            autocommit:     false,
-            deferrable:     true,
-            type:           db.Transaction.TYPES.DEFERRED,
-            isolationLevel: db.Transaction.ISOLATION_LEVELS.SERIALIZABLE
-        }, (tx) => {
-            /*  create context for GraphQL resolver functions  */
-            let ctx = { tx }
+            /*  wrap GraphQL operation into a database transaction  */
+            return db.transaction({
+                autocommit:     false,
+                deferrable:     true,
+                type:           db.Transaction.TYPES.DEFERRED,
+                isolationLevel: db.Transaction.ISOLATION_LEVELS.SERIALIZABLE
+            }, (tx) => {
+                /*  create context for GraphQL resolver functions  */
+                let ctx = { tx }
 
-            /*  execute the GraphQL query against the GraphQL schema  */
-            return GraphQL.graphql(schema, query, null, ctx, variables, operation)
-        }).then((result) => {
-            /*  success/commit  */
-            reply(result).code(200)
-        }).catch((result) => {
-            /*  error/rollback  */
-            reply(result)
-        })
-    }
-})
+                /*  execute the GraphQL query against the GraphQL schema  */
+                return GraphQL.graphql(schema, query, null, ctx, variables, operation)
+            }).then((result) => {
+                /*  success/commit  */
+                return h.response(result).code(200)
+            }).catch((result) => {
+                /*  error/rollback  */
+                return h.response(result).code(200)
+            })
+        }
+    })
 
-/*  start server  */
-server.start(() => {
+    /*  start server  */
+    await server.start()
     console.log(`GraphiQL UI:  [GET]  http://${server.info.host}:${server.info.port}/api`)
     console.log(`GraphQL  API: [POST] http://${server.info.host}:${server.info.port}/api`)
     console.log(`GraphQL  API: [POST] ws://${server.info.host}:${server.info.port}/api`)
+})().catch((err) => {
+    console.log("ERROR", err)
 })
 
