@@ -14,15 +14,15 @@
         "graphql-tools-sequelize": "1.5.0",
         "graphql-tools-subscribe": "1.0.0",
         "graphql-tools-types":     "1.1.15",
-        "graphql-io-server":       "1.1.0",
+        "graphql-io-server":       "1.1.1",
         "hapi":                    "17.2.3",
         "hapi-plugin-graphiql":    "2.0.1",
         "hapi-plugin-peer":        "1.0.0",
-        "hapi-plugin-websocket":   "2.0.2",
+        "hapi-plugin-websocket":   "2.0.3",
         "boom":                    "7.2.0",
         "request":                 "2.85.0",
         "request-promise":         "4.2.2",
-        "sequelize":               "4.37.4",
+        "sequelize":               "4.37.5",
         "sqlite3":                 "4.0.0"
     },
     "scripts": {
