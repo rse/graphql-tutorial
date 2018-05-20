@@ -423,6 +423,11 @@ let query = `
                 /*  error/rollback  */
                 if (scope)
                     scope.reject()
+                if (typeof result === "object" && result instanceof Error)
+                    result = `${result.name}: ${result.message}`
+                else if (typeof result !== "string")
+                    result = result.toString()
+                result = { errors: [ { message: result } ] }
                 return h.response(result).code(200)
             })
         }

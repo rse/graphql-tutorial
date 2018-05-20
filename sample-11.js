@@ -272,6 +272,11 @@ let query = `
             return GraphQL.graphql(schema, query, null, ctx, variables, operation).then((result) => {
                 return h.response(result).code(200)
             }).catch((result) => {
+                if (typeof result === "object" && result instanceof Error)
+                    result = `${result.name}: ${result.message}`
+                else if (typeof result !== "string")
+                    result = result.toString()
+                result = { errors: [ { message: result } ] }
                 return h.response(result).code(200)
             })
         }
