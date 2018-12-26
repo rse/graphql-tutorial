@@ -89,9 +89,9 @@ let id = 0
 const gts = new GraphQLSequelize(db, {
     idtype: "String",
     idmake: () => (id++).toString(),
-    tracer: (type, oid, obj, op, via, onto, ctx) => {
+    tracer: (record, ctx) => {
         if (ctx.scope !== null)
-            ctx.scope.record(type, oid, op, via, onto)
+            ctx.scope.record(record)
     }
 })
 gts.boot()
@@ -259,8 +259,8 @@ let query = `
     /*  setup network service  */
     let server = new Server({
         url:     "http://0.0.0.0:12345/api",
-        pubsub:  "spm",
-        keyval:  "spm",
+        pubsub:  "spm:sample",
+        keyval:  "spm:sample",
         example: query.replace(/^\n/, "").replace(/^    /mg, "")
     })
 

@@ -92,8 +92,8 @@ dm.Person .belongsTo(dm.OrgUnit, { as: "belongsTo",  foreignKey: "orgUnitId"    
 
 /*  bootstrap GraphQL subscription framework  */
 let sub = new GraphQLSubscribe({
-    pubsub: "spm",
-    keyval: "spm"
+    pubsub: "spm:sample",
+    keyval: "spm:sample"
 })
 
 /*  bootstrap GraphQL to Sequelize mapping  */
