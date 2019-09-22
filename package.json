@@ -3,26 +3,26 @@
     "version":     "0.0.0",
     "description": "TechINSIGHT GraphQL - Sample Service",
     "devDependencies": {
-        "@babel/node":             "7.2.2",
-        "@babel/core":             "7.2.2",
-        "@babel/preset-env":       "7.3.1"
+        "@babel/node":             "7.6.1",
+        "@babel/core":             "7.6.0",
+        "@babel/preset-env":       "7.6.0"
     },
     "dependencies": {
-        "graphql":                 "14.1.1",
-        "graphql-tools":           "4.0.4",
-        "graphql-tools-sequelize": "2.1.2",
-        "graphql-tools-subscribe": "2.2.2",
-        "graphql-tools-types":     "1.2.1",
-        "graphql-io-server":       "1.6.4",
-        "hapi":                    "18.0.1",
-        "hapi-plugin-graphiql":    "2.2.0",
-        "hapi-plugin-peer":        "1.0.8",
-        "hapi-plugin-websocket":   "2.0.16",
+        "graphql":                 "14.5.7",
+        "graphql-tools":           "4.0.5",
+        "graphql-tools-sequelize": "2.2.0",
+        "graphql-tools-subscribe": "2.2.3",
+        "graphql-tools-types":     "1.2.2",
+        "graphql-io-server":       "1.8.1",
+        "hapi":                    "18.1.0",
+        "hapi-plugin-graphiql":    "2.3.0",
+        "hapi-plugin-peer":        "1.1.0",
+        "hapi-plugin-websocket":   "2.1.2",
         "boom":                    "7.3.0",
         "request":                 "2.88.0",
-        "request-promise":         "4.2.2",
-        "sequelize":               "4.42.0",
-        "sqlite3":                 "4.0.6"
+        "request-promise":         "4.2.4",
+        "sequelize":               "5.19.0",
+        "sqlite3":                 "4.1.0"
     },
     "scripts": {
         "sample-01": "babel-node --presets @babel/preset-env sample-01.js",
