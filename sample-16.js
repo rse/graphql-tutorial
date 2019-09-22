@@ -406,8 +406,8 @@ let query = `
             return db.transaction({
                 autocommit:     false,
                 deferrable:     true,
-                type:           db.Transaction.TYPES.DEFERRED,
-                isolationLevel: db.Transaction.ISOLATION_LEVELS.SERIALIZABLE
+                type:           Sequelize.Transaction.TYPES.DEFERRED,
+                isolationLevel: Sequelize.Transaction.ISOLATION_LEVELS.SERIALIZABLE
             }, (tx) => {
                 /*  create context for GraphQL resolver functions  */
                 let ctx = { tx, scope }
