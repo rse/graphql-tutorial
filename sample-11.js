@@ -19,9 +19,9 @@
 /*  external requirements  */
 import * as GraphQL      from "graphql"
 import * as GraphQLTools from "graphql-tools"
-import HAPI              from "hapi"
+import HAPI              from "@hapi/hapi"
 import HAPIGraphiQL      from "hapi-plugin-graphiql"
-import Boom              from "boom"
+import Boom              from "@hapi/boom"
 
 /*  the particular underlying data  */
 let data = {

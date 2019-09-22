@@ -28,11 +28,11 @@ import GraphQLSequelize  from "graphql-tools-sequelize"
 import GraphQLSubscribe  from "graphql-tools-subscribe"
 import GraphQLTypes      from "graphql-tools-types"
 import Sequelize         from "sequelize"
-import HAPI              from "hapi"
+import HAPI              from "@hapi/hapi"
 import HAPIGraphiQL      from "hapi-plugin-graphiql"
 import HAPIWebSocket     from "hapi-plugin-websocket"
 import HAPIPeer          from "hapi-plugin-peer"
-import Boom              from "boom"
+import Boom              from "@hapi/boom"
 
 /*  establish database connection  */
 const db = new Sequelize("./sample.db", "", "", {

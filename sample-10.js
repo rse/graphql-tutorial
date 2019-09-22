@@ -19,8 +19,8 @@
 import util              from "util"
 import * as GraphQL      from "graphql"
 import * as GraphQLTools from "graphql-tools"
-import HAPI              from "hapi"
-import Boom              from "boom"
+import HAPI              from "@hapi/hapi"
+import Boom              from "@hapi/boom"
 import request           from "request-promise"
 
 /*  the particular underlying data  */
