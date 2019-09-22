@@ -1,7 +1,7 @@
 {
     "name":        "sample",
     "version":     "0.0.0",
-    "description": "TechINSIGHT GraphQL - Sample Service",
+    "description": "GraphQL Tutorial",
     "devDependencies": {
         "@babel/node":             "7.6.1",
         "@babel/core":             "7.6.0",

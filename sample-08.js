@@ -1,5 +1,5 @@
 /*
-**  TechINSIGHT GraphQL: Sample Service
+**  GraphQL Tutorial: Sample Service
 **  Author: Ralf S. Engelschall, msg Applied Technology Research
 **
 **  Stage of Extension:
