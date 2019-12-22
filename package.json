@@ -3,26 +3,26 @@
     "version":     "0.0.0",
     "description": "GraphQL Tutorial",
     "devDependencies": {
-        "@babel/node":             "7.6.1",
-        "@babel/core":             "7.6.0",
-        "@babel/preset-env":       "7.6.0"
+        "@babel/node":             "7.7.7",
+        "@babel/core":             "7.7.7",
+        "@babel/preset-env":       "7.7.7"
     },
     "dependencies": {
-        "graphql":                 "14.5.7",
-        "graphql-tools":           "4.0.5",
+        "graphql":                 "14.5.8",
+        "graphql-tools":           "4.0.6",
         "graphql-tools-sequelize": "2.2.0",
         "graphql-tools-subscribe": "2.2.3",
         "graphql-tools-types":     "1.2.2",
         "graphql-io-server":       "1.8.1",
         "@hapi/hapi":              "18.4.0",
-        "@hapi/boom":              "7.4.9",
+        "@hapi/boom":              "8.0.1",
         "hapi-plugin-graphiql":    "2.3.0",
-        "hapi-plugin-peer":        "1.1.0",
-        "hapi-plugin-websocket":   "2.1.2",
+        "hapi-plugin-peer":        "1.1.2",
+        "hapi-plugin-websocket":   "2.2.1",
         "request":                 "2.88.0",
-        "request-promise":         "4.2.4",
-        "sequelize":               "5.19.0",
-        "sqlite3":                 "4.1.0"
+        "request-promise":         "4.2.5",
+        "sequelize":               "5.21.3",
+        "sqlite3":                 "4.1.1"
     },
     "scripts": {
         "sample-01": "babel-node --presets @babel/preset-env sample-01.js",
