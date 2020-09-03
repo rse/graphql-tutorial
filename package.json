@@ -14,7 +14,7 @@
         "graphql-tools-subscribe": "2.2.4",
         "graphql-tools-types":     "1.2.3",
         "graphql-io-server":       "1.8.2",
-        "@hapi/hapi":              "18.4.0",
+        "@hapi/hapi":              "20.0.0",
         "@hapi/boom":              "8.0.1",
         "hapi-plugin-graphiql":    "2.3.0",
         "hapi-plugin-peer":        "1.1.2",
